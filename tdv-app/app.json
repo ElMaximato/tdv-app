@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Tiempo de Videojuegos",
+    "slug": "fernando-velazquez-flores",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0f0f1a",
+    "android": {
+      "package": "com.tdv.app",
+      "googleServicesFile": "./google-services.json"
+    },
+    "scheme": "tdvapp",
+    "plugins": [
+      "expo-secure-store",
+      "expo-local-authentication",
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.tdv.app",
+          "enableGooglePay": false
+        }
+      ],
+      [
+        "expo-build-properties",
+        { "android": { "usesCleartextTraffic": true } }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#e60012"
+        }
+      ],
+      "expo-dev-client"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8440c039-0d44-4f16-b2a6-02392bce34b6"
+      }
+    },
+    "owner": "velazquezs-organization"
+  }
+}

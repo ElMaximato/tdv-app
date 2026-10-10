@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── BASE ──────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: #0f0f1a;
+    color: #e8e8f0;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  h1, h2, h3 { font-family: 'VT323', monospace; text-transform: uppercase; letter-spacing: 0.03em; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #1a1a2e; }
+  ::-webkit-scrollbar-thumb { background: #3a3a5c; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #5a5a8c; }
+}
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+:root {
+  --bg-primary:   #0f0f1a;
+  --bg-card:      rgba(30, 30, 50, 0.6);
+  --bg-glass:     rgba(255, 255, 255, 0.05);
+  --bg-glass-h:   rgba(255, 255, 255, 0.08);
+  --border-glass: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  --text-primary: #e8e8f0;
+  --text-muted:   #8888a8;
+  --text-dim:     #55556a;
+  --accent-red:   #e60012;
+  --accent-blue:  #3b82f6;
+  --accent-gold:  #fbbf24;
+  --accent-green: #22c55e;
+  --accent-cyan:  #06b6d4;
+  /* Console colors */
+  --snes-purple:  #6b21a8;
+  --n64-green:    #16a34a;
+  --ps1-blue:     #2563eb;
+  --ps2-blue:     #1e40af;
+  --ngc-purple:   #7c3aed;
+  --gba-indigo:   #4f46e5;
+  --gbc-teal:     #0d9488;
+}
+
+/* ─── COMPONENTS ────────────────────────────────────────────── */
+@layer components {
+
+  /* Glass card — the core building block */
+  .glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+  .glass-card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-glass-h);
+  }
+
+  /* Subtle glass panel */
+  .glass-panel {
+    background: rgba(20, 20, 35, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-glass);
+    border-radius: 20px;
+  }
+
+  /* Retro accent bar */
+  .retro-bar {
+    background: linear-gradient(90deg, var(--accent-red) 0%, #cc0010 100%);
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: white;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+  }
+
+  /* Retro section header */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-header .retro-tag {
+    background: var(--accent-red);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: white;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl
+           font-semibold text-sm text-white transition-all duration-200 cursor-pointer;
+    background: linear-gradient(135deg, var(--accent-red) 0%, #cc0010 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(230, 0, 18, 0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(230, 0, 18, 0.4);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl
+           font-semibold text-sm transition-all duration-200 cursor-pointer;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+  }
+  .btn-secondary:hover {
+    background: var(--bg-glass-h);
+    border-color: var(--border-hover);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           font-medium text-sm transition-all duration-200 cursor-pointer;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+  }
+  .btn-ghost:hover { color: var(--text-primary); background: var(--bg-glass); }
+
+  /* Input fields */
+  .input-glass {
+    @apply w-full px-4 py-2.5 rounded-xl text-sm outline-none transition-all duration-200;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+  }
+  .input-glass::placeholder { color: var(--text-dim); }
+  .input-glass:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  }
+
+  /* Score bar */
+  .score-bar-wrap {
+    @apply w-full h-2 rounded-full overflow-hidden;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    color: var(--text-muted);
+  }
+  .badge-red    { background: rgba(230,0,18,0.15); border-color: rgba(230,0,18,0.3); color: #ff4444; }
+  .badge-gold   { background: rgba(251,191,36,0.15); border-color: rgba(251,191,36,0.3); color: #fbbf24; }
+  .badge-green  { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.3); color: #22c55e; }
+  .badge-blue   { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.3); color: #3b82f6; }
+
+  /* Platform tags */
+  .platform-tag {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+  }
+  .glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.font-display {
+  font-family: 'VT323', monospace; /* O la que uses para títulos */
+}
+
+  /* Pixel decorations */
+  .pixel-accent {
+    font-family: 'Press Start 2P', monospace;
+    letter-spacing: 0.5px;
+  }
+
+  /* Animate */
+  .animate-blink { animation: blink 1s step-end infinite; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-glow  { animation: glow 2s ease-in-out infinite alternate; }
+}
+
+/* ─── KEYFRAMES ─────────────────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes glow {
+  from { box-shadow: 0 0 10px rgba(230,0,18,0.2); }
+  to   { box-shadow: 0 0 25px rgba(230,0,18,0.4); }
+}
+/* ─── AÑADIR AL FINAL DE index.css ────────────────────────────
+   Animaciones para NaviSprite y PixelRunners
+   ─────────────────────────────────────────────────────────── */
+
+/* Pop de la burbuja de diálogo de Navi */
+@keyframes naviPop {
+  0%   { transform: translateX(-50%) scale(0.5); opacity: 0; }
+  70%  { transform: translateX(-50%) scale(1.1); }
+  100% { transform: translateX(-50%) scale(1);   opacity: 1; }
+}
+
+/* Pulso del aura de Navi */
+@keyframes naviGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px #00cfff) drop-shadow(0 0 12px #00cfff80); }
+  50%       { filter: drop-shadow(0 0 10px #00ffff) drop-shadow(0 0 20px #00ffff60); }
+}
+
+/* Paso de personajes pixel (frame 1 → frame 2, simulado con translateY) */
+@keyframes pixelWalk {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-2px); }
+}

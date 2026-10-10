@@ -1,0 +1,35 @@
+services:
+  # Base de Datos MySQL
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=temp_db
+    ports:
+      - "3307:3306"  # Usamos 3307 en tu PC para evitar choques con otros MySQL
+    networks:
+      - app-network
+
+  # Interfaz de phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: pma_gui
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db       # Nombre del servicio de arriba
+      - PMA_PORT=3306     # Puerto interno de Docker
+      - PMA_USER=root
+      - PMA_PASSWORD=
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

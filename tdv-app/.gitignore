@@ -1,0 +1,24 @@
+# Dependencias y builds
+node_modules/
+.expo/
+dist/
+web-build/
+*.apk
+*.aab
+*.keystore
+*.jks
+*.p8
+*.p12
+*.pem
+
+# Secretos: nunca subir
+.env
+.env.*
+!.env.example
+google-services.json
+*firebase-adminsdk*.json
+
+# Sistema
+.DS_Store
+npm-debug.*
+*.tsbuildinfo
